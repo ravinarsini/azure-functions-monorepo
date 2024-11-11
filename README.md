@@ -5,12 +5,12 @@ When deploying a monorepo to Azure Functions, the deployment process is not as s
 The current code deploys all resources, however, the Azure Functions are not deployed correctly. The deployment process is not able to find the functions in the expressjs app.
 
 ## Know Issues
-[How to support monorepo](https://github.com/Azure/azure-functions-nodejs-library/issues/260)
-[[Issue] Azure Functions deployment does not work well in the case of a monorepo #3697](https://github.com/Azure/azure-dev/issues/3697)
+- [How to support monorepo](https://github.com/Azure/azure-functions-nodejs-library/issues/260)
+- [[Issue] Azure Functions deployment does not work well in the case of a monorepo #3697](https://github.com/Azure/azure-dev/issues/3697)
 
 ## Potential Solutions
-[Deploy an Azure Functions app from a monorepo with a GitHub Action for Node.js](https://dfberry.github.io/2024-04-07-mono-repo-functions.md)
-[Turbo Mono repo dploying a nextjs 14 to Azure App Service](https://stackoverflow.com/questions/78121715/turbo-mono-repo-dploying-a-nextjs-14-to-azure-app-service)
+- [Deploy an Azure Functions app from a monorepo with a GitHub Action for Node.js](https://dfberry.github.io/2024-04-07-mono-repo-functions.md)
+- [Turbo Mono repo dploying a nextjs 14 to Azure App Service](https://stackoverflow.com/questions/78121715/turbo-mono-repo-dploying-a-nextjs-14-to-azure-app-service)
 
 
 ---
