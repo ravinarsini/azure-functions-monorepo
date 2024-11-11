@@ -1,0 +1,28 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "ui": "tui",
+  "tasks": {
+    "build": {
+      "dependsOn": ["^build"],
+      "inputs": ["$TURBO_DEFAULT$", ".env*"],
+      "outputs": [".next/**", "!.next/cache/**", "dist/**", "public/**"]
+    },
+    "lint": {
+      "dependsOn": ["^lint"],
+      "env": [
+        "NODE_ENV",
+        "AZURE_KEY_VAULT_ENDPOINT",
+        "FUNCTIONS_CUSTOMHANDLER_PORT",
+        "PORT"
+      ]
+    },
+    "test": {
+      "outputs": ["coverage/**"],
+      "dependsOn": []
+    },
+    "dev": {
+      "cache": false,
+      "persistent": true
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "name": "@repo/models",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Uses zod schemas to generate Open API Swagger documentation",
+  "author": "Tom Fisher",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist/**"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "lint": "eslint src/",
+    "typecheck": "tsc --noEmit",
+    "test": "jest"
+  },
+  "dependencies": {
+    "mongodb": "^4.17.0",
+    "mongoose": "^6.11.3"
+  },
+  "devDependencies": {
+    "@repo/eslint-config": "*",
+    "@repo/typescript-config": "*",
+    "@types/node": "^20.11.24",
+    "tsup": "latest",
+    "typescript": "latest"
+  }
+}
