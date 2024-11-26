@@ -53,7 +53,7 @@ jobs:
         working-directory: ./src/api
         run: |
           npm install
-          npm link ../shared/dist # Link built shared library
+          npm link ../models/dist # Link built shared library
           npm run build
         
       - name: Zip artifact for deployment
