@@ -14,7 +14,7 @@ jobs:
     name: Build Shared Library
     runs-on: ubuntu-latest
     outputs:
-      shared-output-path: ${{ steps.shared-output.outputs.output-path }}
+      shared-path: ${{ env.output-path }}
 
     steps:
       - name: Checkout Code
@@ -53,7 +53,7 @@ jobs:
         working-directory: ./src/api
         run: |
           npm install
-          npm link ./packages/models/dist # Link built shared library
+          npm link ${{env.output-path}} # Link built shared library
           npm run build
         
       - name: Zip artifact for deployment
