@@ -50,7 +50,7 @@ jobs:
           
       # Build the API and link the shared library
       - name: Install Dependencies and Link Shared
-        working-directory: ./api
+        working-directory: ./src/api
         run: |
           npm install
           npm link ../shared/dist # Link built shared library
