@@ -53,10 +53,9 @@ jobs:
         run: |
           npm install --force
           npm link ${{env.output-path}} --force # Link built shared library
-          npm run build --force
+          npm run build --force --if-present
      
       - name: 'Deploy to Azure Web App'
-        id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
           app-name: todo-api-rn
