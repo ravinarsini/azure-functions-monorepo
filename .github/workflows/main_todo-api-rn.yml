@@ -63,4 +63,4 @@ jobs:
           app-name: todo-api-rn
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE }}
-          package: ./src/api/build
+          package: ./src/api
