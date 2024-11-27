@@ -60,7 +60,7 @@ export const createApp = async (): Promise<Express> => {
 
   // Swagger UI
   const swaggerDocument = yaml.load("./openapi.yaml");
-  app.use("/", swaggerUI.serve, swaggerUI.setup(swaggerDocument));
+  app.use("/", test);
 
   return app;
 };
