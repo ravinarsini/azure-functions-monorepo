@@ -1,7 +1,7 @@
 import express, { Request } from "express";
 import mongoose from "mongoose";
 import { PagingQueryParams } from "../routes/common";
-import { todoList } from "@repo/models";
+import { todoList, todoItem } from "@repo/models";
 
 const router = express.Router();
 
@@ -19,7 +19,7 @@ router.get(
     const skip = req.query.skip ? parseInt(req.query.skip) : 0;
     const top = req.query.top ? parseInt(req.query.top) : 20;
     const lists = await query.skip(skip).limit(top).exec();
-
+    
     res.json(lists);
   }
 );
