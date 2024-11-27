@@ -41,10 +41,10 @@ jobs:
     steps:
       # Checkout code
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v2
       
       - name: Set up Node.js version
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v2
         with:
           node-version: '18.x'
           
@@ -57,7 +57,9 @@ jobs:
           npm run build
         
       - name: Zip artifact for deployment
-        run: zip release.zip ./* -r
+        run: |
+          cd ./src/api
+          zip release.zip ./* -r
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
@@ -88,4 +90,4 @@ jobs:
           app-name: todo-api-rn
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE }}
-          package: .
+          package: ./src/api/build
