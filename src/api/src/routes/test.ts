@@ -7,11 +7,11 @@ router.get(
     "/",
     async (req, res) => {
 
-        let itemList:user[] = [];
+        const itemList:user[] = [];
 
         for (let i = 1; i <= 10; i++) {
 
-            let item: user = {
+            const item: user = {
                 id: i,
                 name: "John_"+i,
                 active: true,

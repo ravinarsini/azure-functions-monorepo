@@ -34,7 +34,6 @@ jobs:
           echo "output-path=$(pwd)/dist" >> $GITHUB_ENV
       
   build-api:
-    name: Deploy API to Azure App Service
     needs: build-shared
     runs-on: ubuntu-latest
 
