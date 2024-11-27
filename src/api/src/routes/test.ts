@@ -7,7 +7,7 @@ router.get(
     "/",
     async (req, res) => {
 
-        let itemList = user[] = [];
+        let itemList:user[] = [];
 
         for (let i = 1; i <= 10; i++) {
 
