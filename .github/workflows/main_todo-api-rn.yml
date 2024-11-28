@@ -54,21 +54,15 @@ jobs:
         run: |
           npm install
           npm link ${{env.output-path}} # Link built shared library
-          npm run build        
-     
-      - name: List PWD
-        run: |
+          npm run build
           pwd
-          cd ./src/api
-          ls -l
-        
+          ls -l    
+             
       - name: 'Deploy to Azure Web App'        
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2        
         with:
-          run: |
-            cd ./src/api
-            ls -l
+          working-directory: ./src/api
           app-name: todo-api-rn
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE }}
