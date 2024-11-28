@@ -35,9 +35,6 @@ jobs:
           echo "output-path=$(pwd)/dist" >> $GITHUB_ENV
       
   build-api:
-    outputs:
-      api-path: ${{ env.output-path-api }}
-
     name: Deploy API to Azure App Service
     needs: build-shared
     runs-on: ubuntu-latest
@@ -58,13 +55,13 @@ jobs:
         run: |
           npm install
           npm link ${{env.output-path}} # Link built shared library
-          npm run build  
-          echo "api-path=$(pwd)/." >> $GITHUB_ENV
-        
+          npm run build
+          pwd
+      
       - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
           app-name: todo-api-rn
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE }}
-          package: ${{ env.output-path-api }}
+          package: ./src/api/
