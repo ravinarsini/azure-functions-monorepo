@@ -59,7 +59,7 @@ jobs:
           npm install
           npm link ${{env.output-path}} # Link built shared library
           npm run build  
-          echo "api-path=$(pwd)/dist" >> $GITHUB_ENV
+          echo "api-path=$(pwd)/." >> $GITHUB_ENV
         
       - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp
