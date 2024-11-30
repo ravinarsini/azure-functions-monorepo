@@ -51,12 +51,10 @@ jobs:
           
       # Build the API and link the shared library
       - name: Install Dependencies and Link Shared
-        working-directory: ./src/api
+        working-directory: ./src/test-api
         run: |
           npm install
-          npm link ${{env.output-path}} # Link built shared library
           npm run build
-          pwd
       
       - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp
@@ -64,4 +62,4 @@ jobs:
         with:
           app-name: todo-api-rn
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE }}
-          package: ./src/api/
+          package: ./src/test-api
