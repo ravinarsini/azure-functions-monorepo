@@ -24,7 +24,7 @@ jobs:
       - name: Set up Node.js version
         uses: actions/setup-node@v3
         with:
-          node-version: '18.x'
+          node-version: '20.x'
 
       - name: Build the shared
         working-directory: ./packages/models
@@ -47,7 +47,7 @@ jobs:
       - name: Set up Node.js version
         uses: actions/setup-node@v2
         with:
-          node-version: '18.x'
+          node-version: '20.x'
           
       # Build the API and link the shared library
       - name: Install Dependencies and Link Shared
