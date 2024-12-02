@@ -54,7 +54,7 @@ jobs:
         working-directory: ./src/api
         run: |
           npm install
-          mv ../../node_modules ./
+          npm link ${{env.output-path}} # Link built shared library
           npm run build
       
       - name: 'Deploy to Azure Web App'
