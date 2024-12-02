@@ -24,6 +24,6 @@ export const configureMongoose = async (config: DatabaseConfig) => {
     }
     catch (err) {
         logger.error(`Mongoose database error: ${err}`);
-        throw err;
+        //throw err;
     }
 };

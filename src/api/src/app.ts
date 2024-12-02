@@ -1,7 +1,4 @@
 import express, { Express } from "express";
-import swaggerUI from "swagger-ui-express";
-import cors from "cors";
-import yaml from "yamljs";
 import { getConfig } from "./config";
 import tests from "./routes/test";
 import { configureMongoose } from "./lib/mongoose";
@@ -18,22 +15,6 @@ const allowOrigins = process.env.API_ALLOW_ORIGINS;
 // allowing all origins.
 const environment = process.env.NODE_ENV;
 
-const originList = (): string[] | string => {
-  if (environment && environment === "development") {
-    console.log(`Allowing requests from any origins. NODE_ENV=${environment}`);
-    return "*";
-  }
-
-  const origins = ["https://portal.azure.com", "https://ms.portal.azure.com"];
-
-  if (allowOrigins && allowOrigins !== "") {
-    allowOrigins.split(",").forEach((origin) => {
-      origins.push(origin);
-    });
-  }
-
-  return origins;
-};
 
 export const createApp = async (): Promise<Express> => {
   const config = await getConfig();
@@ -45,18 +26,10 @@ export const createApp = async (): Promise<Express> => {
   // Middleware
   app.use(express.json());
 
-  app.use(
-    cors({
-      origin: originList(),
-    })
-  );
-
   // API Routes
   app.use("/test", tests);
 
-  // Swagger UI
-  const swaggerDocument = yaml.load("./openapi.yaml");
-  app.use("/", swaggerUI.serve, swaggerUI.setup(swaggerDocument));
+  app.use("/", tests);
 
   return app;
 };
