@@ -54,6 +54,7 @@ jobs:
         working-directory: ./src/test-api
         run: |
           npm install
+          mv ../../node_modules ./
           npm run build
       
       - name: 'Deploy to Azure Web App'

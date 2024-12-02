@@ -8,9 +8,8 @@
     "start": "node dist/app.js"
   },
   "author": "",
-  "license": "MIT", 
+  "license": "MIT",
   "dependencies": {
-    "@repo/models": "*",
     "express": "^4.21.0"
   },
   "devDependencies": {
@@ -19,7 +18,7 @@
     "@repo/typescript-config": "*",
     "@types/config": "^0.0.41",
     "@types/cors": "^2.8.12",
-    "@types/express": "^4.17.13",
+    "@types/express": "^4.17.21",
     "@types/jest": "^28.1.1",
     "@types/supertest": "^2.0.12",
     "@types/swagger-jsdoc": "^6.0.1",
