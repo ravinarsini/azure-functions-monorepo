@@ -15,9 +15,3 @@ export type TodoItem = {
     createdDate?: Date
     updatedDate?: Date
 }
-
-export interface User {
-    id: number;
-    name: string;
-    active: boolean;
-}

@@ -3,7 +3,7 @@ import { logger } from "./config/observability";
 
 const main = async () => {
     const app = await createApp();
-    const port = 80;
+    const port = process.env.FUNCTIONS_CUSTOMHANDLER_PORT || process.env.PORT || 8080;
 
     app.listen(port, () => {
         logger.info(`Started listening on port ${port}`);

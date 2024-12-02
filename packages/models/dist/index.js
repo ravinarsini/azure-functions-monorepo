@@ -21,7 +21,7 @@ var src_exports = {};
 __export(src_exports, {
   todoItem: () => todoItem_exports,
   todoList: () => todoList_exports,
-  user: () => todoItem_exports
+  user: () => user_exports
 });
 module.exports = __toCommonJS(src_exports);
 
@@ -39,6 +39,9 @@ var TodoItemState = /* @__PURE__ */ ((TodoItemState2) => {
 
 // src/todoList.ts
 var todoList_exports = {};
+
+// src/user.ts
+var user_exports = {};
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
   todoItem,

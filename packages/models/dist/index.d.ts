@@ -14,18 +14,12 @@ type TodoItem = {
     createdDate?: Date;
     updatedDate?: Date;
 };
-interface User {
-    id: number;
-    name: string;
-    active: boolean;
-}
 
 type todoItem_TodoItem = TodoItem;
 type todoItem_TodoItemState = TodoItemState;
 declare const todoItem_TodoItemState: typeof TodoItemState;
-type todoItem_User = User;
 declare namespace todoItem {
-  export { type todoItem_TodoItem as TodoItem, todoItem_TodoItemState as TodoItemState, type todoItem_User as User };
+  export { type todoItem_TodoItem as TodoItem, todoItem_TodoItemState as TodoItemState };
 }
 
 type TodoList = {
@@ -41,4 +35,15 @@ declare namespace todoList {
   export type { todoList_TodoList as TodoList };
 }
 
-export { todoItem, todoList, todoItem as user };
+interface User {
+    id: number;
+    name: string;
+    active: boolean;
+}
+
+type user_User = User;
+declare namespace user {
+  export type { user_User as User };
+}
+
+export { todoItem, todoList, user };

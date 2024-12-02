@@ -51,7 +51,7 @@ jobs:
           
       # Build the API and link the shared library
       - name: Install Dependencies and Link Shared
-        working-directory: ./src/test-api
+        working-directory: ./src/api
         run: |
           npm install
           mv ../../node_modules ./
@@ -63,4 +63,4 @@ jobs:
         with:
           app-name: todo-api-rn
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE }}
-          package: ./src/test-api
+          package: ./src/api
