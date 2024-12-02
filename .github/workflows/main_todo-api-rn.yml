@@ -54,19 +54,8 @@ jobs:
         working-directory: ./src/api
         run: |
           npm install
-          SOURCE_DIR="../../node_modules"
-          TARGET_DIR="./node_modules"
-          for item in "$SOURCE_DIR"/*; do
-          item_name=$(basename "$item")
-          target_item="$TARGET_DIR/$item_name"
-
-          if [ ! -e "$target_item" ]; then
-            echo "Moving $item to $TARGET_DIR"
-            mv "$item" "$TARGET_DIR"
-          else
-            echo "Skipping $item. Already exists in $TARGET_DIR."
-          fi
-          done
+          rm -rf node_modules
+          mv ../../node_modules ./
           npm link ${{env.output-path}} # Link built shared library
           npm run build
       
