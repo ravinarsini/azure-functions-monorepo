@@ -12,7 +12,7 @@ on:
 
 jobs:
   build-deploy:
-    name: Build Shared Library
+    name: build and deploy
     runs-on: ubuntu-latest
     outputs:
       shared-path: ${{ env.output-path }}
