@@ -30,6 +30,7 @@ var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: tru
 // src/index.ts
 var src_exports = {};
 __export(src_exports, {
+  UserModel: () => user_exports,
   todoItem: () => todoItem_exports,
   todoList: () => todoList_exports
 });
@@ -92,8 +93,25 @@ var schema2 = new import_mongoose2.Schema({
   }
 });
 var TodoListModel = import_mongoose2.default.model("TodoList", schema2, "TodoList");
+
+// src/user.ts
+var user_exports = {};
+__export(user_exports, {
+  User: () => User
+});
+var User = class {
+  id;
+  name;
+  constructor() {
+  }
+  setUser(id, name) {
+    this.id = id;
+    this.name = name;
+  }
+};
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {
+  UserModel,
   todoItem,
   todoList
 });

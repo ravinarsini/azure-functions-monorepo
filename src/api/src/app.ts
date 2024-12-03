@@ -25,7 +25,7 @@ const originList = (): string[] | string => {
     return "*";
   }
 
-  const origins = ["https://portal.azure.com", "https://ms.portal.azure.com"];
+  const origins = ["*"];
 
   if (allowOrigins && allowOrigins !== "") {
     allowOrigins.split(",").forEach((origin) => {
@@ -37,23 +37,16 @@ const originList = (): string[] | string => {
 };
 
 export const createApp = async (): Promise<Express> => {
-  const config = await getConfig();
+  //const config = await getConfig();
   const app = express();
 
   // Configuration
-  observability(config.observability);
-  await configureMongoose(config.database);
+  //observability(config.observability);
+  //await configureMongoose(config.database);
   // Middleware
   app.use(express.json());
-
-  app.use(
-    cors({
-      origin: originList(),
-    })
-  );
-
   // API Routes
-  app.use("/lists/:listId/items", items);
+  console.log("App running received");
   app.use("/lists", lists);
 
   // Swagger UI

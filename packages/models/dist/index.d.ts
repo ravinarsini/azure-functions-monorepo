@@ -41,4 +41,17 @@ declare namespace todoList {
   export { type todoList_TodoList as TodoList, todoList_TodoListModel as TodoListModel };
 }
 
-export { todoItem, todoList };
+declare class User {
+    id: number;
+    name: string;
+    constructor();
+    setUser(id: number, name: string): void;
+}
+
+type user_User = User;
+declare const user_User: typeof User;
+declare namespace user {
+  export { user_User as User };
+}
+
+export { user as UserModel, todoItem, todoList };
