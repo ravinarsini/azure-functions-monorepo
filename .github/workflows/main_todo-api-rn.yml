@@ -14,9 +14,7 @@ jobs:
   build-deploy:
     name: build and deploy
     runs-on: ubuntu-latest
-    outputs:
-      shared-path: ${{ env.output-path }}
-
+    
     steps:
       - name: Checkout Code
         uses: actions/checkout@v3
@@ -29,31 +27,14 @@ jobs:
       
       # Step 3: Install root dependencies (for monorepo linking)
       - name: Install root dependencies
-        working-directory: ./
         run: npm install
 
-      - name: Build the shared
-        working-directory: ./packages/models
-        id: shared-output
-        run: |
-          npm install
-          npm run build 
-                
-      # Build the API and link the shared library
-      - name: build api
-        working-directory: ./src/api
-        run: |
-          npm install --include=dev
-          npm run build
-      
-      - name: Archive files
-        working-directory: ./src/api
-        run: zip -r api.zip .
-      
-      - name: 'Deploy to Azure Web App'
-        id: deploy-to-webapp
+      - name: Build all projects
+        run: npm run build:all
+
+      - name: 'Deploy to Azure App Service'
         uses: azure/webapps-deploy@v2
         with:
           app-name: todo-api-rn
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE }}
-          package: ./src/api/api.zip
+          package: ./src/api
