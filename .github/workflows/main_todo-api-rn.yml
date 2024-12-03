@@ -11,7 +11,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build-shared:
+  build-deploy:
     name: Build Shared Library
     runs-on: ubuntu-latest
     outputs:
@@ -19,46 +19,36 @@ jobs:
 
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
 
       - name: Set up Node.js version
         uses: actions/setup-node@v3
         with:
           node-version: '20.x'
+          cache: npm
+      
+      # Step 3: Install root dependencies (for monorepo linking)
+      - name: Install root dependencies
+        working-directory: ./
+        run: npm install
 
       - name: Build the shared
         working-directory: ./packages/models
         id: shared-output
         run: |
           npm install
-          npm run build # Ensure a "build" script exists in shared's package.json
-          echo "output-path=$(pwd)/dist" >> $GITHUB_ENV
-      
-  build-api:
-    name: Deploy API to Azure App Service
-    needs: build-shared
-    runs-on: ubuntu-latest
-
-    steps:
-      # Checkout code
-      - name: Checkout code
-        uses: actions/checkout@v2
-      
-      - name: Set up Node.js version
-        uses: actions/setup-node@v2
-        with:
-          node-version: '20.x'
-          
+          npm run build 
+                
       # Build the API and link the shared library
-      - name: Install Dependencies and Link Shared
+      - name: build api
         working-directory: ./src/api
         run: |
           npm install
-          rm -rf node_modules
-          mv ../../node_modules ./
-          mv ../../node_modules/.* ./node_modules 2>/dev/null || true
-          npm link ${{env.output-path}} # Link built shared library
           npm run build
+      
+      - name: Archive files
+        working-directory: ./src/api
+        run: zip -r api.zip .
       
       - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp
@@ -66,4 +56,4 @@ jobs:
         with:
           app-name: todo-api-rn
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE }}
-          package: ./src/api
+          package: ./src/api/api.zip
