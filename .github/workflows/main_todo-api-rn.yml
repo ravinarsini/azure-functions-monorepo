@@ -36,12 +36,13 @@ jobs:
         run: |
           npm install
           npm run build
-        
+      - name: zip
+        run: zip -r app.zip .
+      
       - name: 'Deploy to Azure Web App'
-        id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
           app-name: 'todo-api-rn'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_B4659A726DF24BB9A2CCA14DC8E45F3A }}
-          package: .
+          package: ./app.zip
