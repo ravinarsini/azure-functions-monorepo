@@ -4,6 +4,5 @@
     "src/*"
   ],
   "version": "independent",
-  "npmClient": "npm",
-  "useWorkspaces": true
+  "npmClient": "npm"
 }
