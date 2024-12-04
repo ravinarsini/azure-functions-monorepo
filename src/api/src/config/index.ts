@@ -11,7 +11,7 @@ export const getConfig: () => Promise<AppConfig> = async () => {
         dotenv.config();
     }
 
-    await populateEnvironmentFromKeyVault();
+    //await populateEnvironmentFromKeyVault();
 
     // Load configuration after Azure KeyVault population is complete
     // eslint-disable-next-line @typescript-eslint/no-var-requires
