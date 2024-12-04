@@ -24,16 +24,25 @@ jobs:
           node-version: '20.9.0'
       
       # Build the API and link the shared library
-      - name: API
-        working-directory: ./src/web
+      - name: root npm install
         run: |
           npm install
           npm run build
 
-      - name: 'Deploy to Azure Web App'
+      # Build the API and link the shared library
+      - name: web
+        working-directory: ./src/web
+        run: |
+          npm install
+          npm run build
+      
+      - name: zip
+        run: zip -r app.zip .
+
+      - name: 'Deploy to web'
         uses: azure/webapps-deploy@v2
         with:
           app-name: 'todo-web'
           slot-name: 'Production'
           publish-profile: ${{ secrets.TODO_WEB_PUBLISH }}
-          package: ./src/web
+          package: ./app.zip
