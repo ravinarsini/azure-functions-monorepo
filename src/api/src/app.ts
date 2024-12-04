@@ -5,6 +5,7 @@ import yaml from "yamljs";
 import { getConfig } from "./config";
 import lists from "./routes/lists";
 import items from "./routes/items";
+import users from "./routes/users";
 import { configureMongoose } from "./lib/mongoose";
 import { observability } from "./config/observability";
 
@@ -12,7 +13,7 @@ import { observability } from "./config/observability";
 // `http://localhost:300, http://otherurl:100`
 // Requests coming to the api server from other urls will be rejected as per
 // CORS.
-const allowOrigins = process.env.API_ALLOW_ORIGINS;
+const allowOrigins = "*";
 
 // Use NODE_ENV to change webConfiguration based on this value.
 // For example, setting NODE_ENV=development disables CORS checking,
@@ -26,29 +27,29 @@ const originList = (): string[] | string => {
   }
 
   const origins = ["*"];
-
-  if (allowOrigins && allowOrigins !== "") {
-    allowOrigins.split(",").forEach((origin) => {
-      origins.push(origin);
-    });
-  }
-
   return origins;
 };
 
 export const createApp = async (): Promise<Express> => {
-  //const config = await getConfig();
+  const config = await getConfig();
   const app = express();
 
   // Configuration
-  //observability(config.observability);
-  //await configureMongoose(config.database);
+  observability(config.observability);
+  await configureMongoose(config.database);
   // Middleware
   app.use(express.json());
-  // API Routes
-  console.log("App running received");
-  app.use("/lists", lists);
 
+  app.use(
+    cors({
+      origin: true,
+    })
+  );
+
+  // API Routes
+  app.use("/lists/:listId/items", items);
+  app.use("/lists", lists);
+  app.use("/users", users);
   // Swagger UI
   const swaggerDocument = yaml.load("./openapi.yaml");
   app.use("/", swaggerUI.serve, swaggerUI.setup(swaggerDocument));

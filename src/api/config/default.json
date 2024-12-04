@@ -1,10 +1,10 @@
 {
     "database": {
-        "connectionString": "",
-        "databaseName": "Todo"
+        "connectionString": "mongodb+srv://ravin:Hyderabad007@todoapi-db.mongocluster.cosmos.azure.com/?tls=true&authMechanism=SCRAM-SHA-256&retrywrites=false&maxIdleTimeMS=120000",
+        "databaseName": "todoapi-db"
     },
     "observability": {
-        "connectionString": "",
+        "connectionString": "InstrumentationKey=6ae04c24-6438-4165-ab9a-525bcff5bbb5;IngestionEndpoint=https://australiaeast-1.in.applicationinsights.azure.com/;LiveEndpoint=https://australiaeast.livediagnostics.monitor.azure.com/;ApplicationId=ca3dcb7c-b273-4ffc-ab2c-d56314f30a32",
         "roleName": "API"
     }
 }
