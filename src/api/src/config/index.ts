@@ -6,18 +6,15 @@ import { logger } from "../config/observability";
 import { IConfig } from "config";
 
 export const getConfig: () => Promise<AppConfig> = async () => {
-    // Load any ENV vars from local .env file
-    if (process.env.NODE_ENV !== "production") {
-        dotenv.config();
-    }
-
-    //await populateEnvironmentFromKeyVault();
-
+    console.log("getConfig1");
     // Load configuration after Azure KeyVault population is complete
     // eslint-disable-next-line @typescript-eslint/no-var-requires
     const config: IConfig = require("config") as IConfig;
+    console.log("getConfig2");
     const databaseConfig = config.get<DatabaseConfig>("database");
+    console.log("getConfig3");
     const observabilityConfig = config.get<ObservabilityConfig>("observability");
+    console.log("getConfig4");
 
     if (!databaseConfig.connectionString) {
         logger.warn("database.connectionString is required but has not been set. Ensure environment variable 'AZURE_COSMOS_CONNECTION_STRING' has been set");
