@@ -6,33 +6,15 @@ import { logger } from "../config/observability";
 import { IConfig } from "config";
 
 export const getConfig: () => Promise<AppConfig> = async () => {
-    console.log("getConfig1");
-    // Load configuration after Azure KeyVault population is complete
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
-    const config: IConfig = require("config") as IConfig;
-    console.log("getConfig2");
-    const databaseConfig = config.get<DatabaseConfig>("database");
-    console.log("getConfig3");
-    const observabilityConfig = config.get<ObservabilityConfig>("observability");
-    console.log("getConfig4");
-
-    if (!databaseConfig.connectionString) {
-        logger.warn("database.connectionString is required but has not been set. Ensure environment variable 'AZURE_COSMOS_CONNECTION_STRING' has been set");
-    }
-
-    if (!observabilityConfig.connectionString) {
-        logger.warn("observability.connectionString is required but has not been set. Ensure environment variable 'APPLICATIONINSIGHTS_CONNECTION_STRING' has been set");
-    }
-
     return {
         observability: {
-            connectionString: observabilityConfig.connectionString,
-            roleName: observabilityConfig.roleName,
+            connectionString: "InstrumentationKey=6ae04c24-6438-4165-ab9a-525bcff5bbb5;IngestionEndpoint=https://australiaeast-1.in.applicationinsights.azure.com/;LiveEndpoint=https://australiaeast.livediagnostics.monitor.azure.com/;ApplicationId=ca3dcb7c-b273-4ffc-ab2c-d56314f30a32",
+            roleName: "API"
         },
         database: {
-            connectionString: databaseConfig.connectionString,
-            databaseName: databaseConfig.databaseName,
-        },
+            connectionString: "mongodb+srv://ravin:Hyderabad007@todoapi-db.mongocluster.cosmos.azure.com/?tls=true&authMechanism=SCRAM-SHA-256&retrywrites=false&maxIdleTimeMS=120000",
+            databaseName: "todoapi-db"
+        }
     };
 };
 

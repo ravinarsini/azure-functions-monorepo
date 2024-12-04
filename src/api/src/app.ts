@@ -31,26 +31,19 @@ const originList = (): string[] | string => {
 };
 
 export const createApp = async (): Promise<Express> => {
-  console.log("received1");
   const config = await getConfig();
-  console.log("received2");
   const app = express();
-  console.log("received3");
 
   // Configuration
   observability(config.observability);
-  console.log("received4");
   await configureMongoose(config.database);
-  console.log("received5");
   // Middleware
   app.use(express.json());
-  console.log("received5");
   app.use(
     cors({
       origin: true,
     })
   );
-  console.log("received6");
   // API Routes
   app.use("/lists/:listId/items", items);
   app.use("/lists", lists);
@@ -58,6 +51,6 @@ export const createApp = async (): Promise<Express> => {
   // Swagger UI
   const swaggerDocument = yaml.load("./openapi.yaml");
   app.use("/", swaggerUI.serve, swaggerUI.setup(swaggerDocument));
-  console.log("received7");
+
   return app;
 };

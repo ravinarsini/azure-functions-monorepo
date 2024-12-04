@@ -1,0 +1,45 @@
+# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
+# More GitHub Actions for Azure: https://github.com/Azure/actions
+
+name: Build and deploy Node.js app to Azure Web App - todo-api-rn
+
+on:
+  push:
+    branches:
+      - ravi_dev_ss
+  workflow_dispatch:
+
+env:
+  VITE_API_BASE_URL: ${{ env.VITE_API_BASE_URL }}
+
+jobs:
+  build-deploy:
+    name: build and deploy web
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js version
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20.9.0'
+      
+      # Build the API and link the shared library
+      - name: API
+        working-directory: ./src/web
+        run: |
+          npm install
+          npm run build
+
+      - name: zip
+        run: zip -r app.zip ./src/web
+      
+      - name: 'Deploy to Azure Web App'
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: 'todo-web'
+          slot-name: 'Production'
+          publish-profile: ${{ secrets.dd }}
+          package: ./app.zip
