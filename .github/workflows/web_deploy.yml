@@ -37,4 +37,4 @@ jobs:
           app-name: 'todo-web'
           slot-name: 'Production'
           publish-profile: ${{ secrets.TODO_WEB_PUBLISH }}
-          package: ./dist
+          package: ./src/web/dist
