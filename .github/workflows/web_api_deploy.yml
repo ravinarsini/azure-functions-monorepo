@@ -39,7 +39,7 @@ jobs:
       - name: 'Deploy API to AP1'
         uses: azure/webapps-deploy@v2
         with:
-          app-name: 'todo-api-rn'
+          app-name: 'todo-api-1'
           slot-name: 'Production'
           publish-profile: ${{ secrets.API1 }}
           package: ./app.zip
@@ -54,7 +54,7 @@ jobs:
       - name: 'Deploy to web'
         uses: azure/webapps-deploy@v2
         with:
-          app-name: 'todo-web'
+          app-name: 'todo-web-1'
           slot-name: 'Production'
           publish-profile: ${{ secrets.WEB1 }}
           package: ./src/web/dist
