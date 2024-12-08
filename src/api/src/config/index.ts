@@ -6,14 +6,19 @@ import { logger } from "../config/observability";
 import { IConfig } from "config";
 
 export const getConfig: () => Promise<AppConfig> = async () => {
+    // Load any ENV vars from local .env file
+    if (!process.env.DB_CONN || !process.env.OBS_CONN) {
+        throw new Error("Missing required environment variables.");
+    }
+
     return {
         observability: {
-            connectionString: "InstrumentationKey=6ae04c24-6438-4165-ab9a-525bcff5bbb5;IngestionEndpoint=https://australiaeast-1.in.applicationinsights.azure.com/;LiveEndpoint=https://australiaeast.livediagnostics.monitor.azure.com/;ApplicationId=ca3dcb7c-b273-4ffc-ab2c-d56314f30a32",
-            roleName: "API"
+            connectionString: process.env.OBS_CONN,
+            roleName: process.env.OBS_ROLE_NAME,
         },
         database: {
-            connectionString: "mongodb+srv://ravin:Hyderabad007@todoapi-db.mongocluster.cosmos.azure.com/?tls=true&authMechanism=SCRAM-SHA-256&retrywrites=false&maxIdleTimeMS=120000",
-            databaseName: "todoapi-db"
+            connectionString: process.env.DB_CONN,
+            databaseName: process.env.DB_NAME,
         }
     };
 };

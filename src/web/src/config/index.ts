@@ -15,7 +15,7 @@ export interface AppConfig {
 
 const config: AppConfig = {
     api: {
-        baseUrl: import.meta.env.VITE_API_BASE_URL || 'https://todo-api-1.azurewebsites.net'
+        baseUrl: import.meta.env.VITE_API_BASE_URL || ''
     },
     observability: {
         connectionString: import.meta.env.VITE_APPLICATIONINSIGHTS_CONNECTION_STRING || ''

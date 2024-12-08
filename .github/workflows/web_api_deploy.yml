@@ -27,12 +27,19 @@ jobs:
           npm install
           npm run build
       
-      # Build the API and link the shared library
+      # Build the API and Read ENV
       - name: Build API
-        working-directory: ./src/api
+        env:
+          NODE_ENV: production
+          DB_CONN: ${{ secrets.DB_CONN }}
+          DB_NAME: ${{ secrets.DB_NAME }}
+          OBS_CONN: ${{ secrets.OBS_CONN }}
+          OBS_ROLE_NAME: ${{ secrets.OBS_ROLE_NAME }}
+          working-directory: ./src/api
         run: |
           npm install
           npm run build
+
       - name: zip
         run: zip -r app.zip .
       
@@ -45,6 +52,9 @@ jobs:
           package: ./app.zip
 
       - name: build web
+        env:
+          VITE_API_BASE_URL: ${{ secrets.VITE_API_BASE_URL }}
+          VITE_APPLICATIONINSIGHTS_CONNECTION_STRING: ${{ secrets.VITE_APPLICATIONINSIGHTS_CONNECTION_STRING }}
         working-directory: ./src/web
         run: |
           npm install
