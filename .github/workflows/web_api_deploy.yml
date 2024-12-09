@@ -37,6 +37,7 @@ jobs:
           OBS_ROLE_NAME: ${{ secrets.OBS_ROLE_NAME }}
         working-directory: ./src/api
         run: |
+          pwd
           npm install
           npm run build
 
