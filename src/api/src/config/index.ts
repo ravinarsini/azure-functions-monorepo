@@ -6,6 +6,7 @@ import { logger } from "../config/observability";
 import { IConfig } from "config";
 
 export const getConfig: () => Promise<AppConfig> = async () => {
+    dotenv.config();
     // Load any ENV vars from local .env file
     if (!process.env.DB_CONN || !process.env.OBS_CONN) {
         throw new Error("Missing required environment variables.");
