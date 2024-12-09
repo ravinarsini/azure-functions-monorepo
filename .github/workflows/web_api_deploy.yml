@@ -28,13 +28,7 @@ jobs:
           npm run build
       
       # Build the API and Read ENV
-      - name: Build API
-        env:
-          NODE_ENV: production
-          DB_CONN: ${{ secrets.DB_CONN }}
-          DB_NAME: ${{ secrets.DB_NAME }}
-          OBS_CONN: ${{ secrets.OBS_CONN }}
-          OBS_ROLE_NAME: ${{ secrets.OBS_ROLE_NAME }}
+      - name: Build API        
         working-directory: ./src/api
         run: |
           pwd
