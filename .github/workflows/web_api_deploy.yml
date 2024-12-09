@@ -35,7 +35,7 @@ jobs:
           DB_NAME: ${{ secrets.DB_NAME }}
           OBS_CONN: ${{ secrets.OBS_CONN }}
           OBS_ROLE_NAME: ${{ secrets.OBS_ROLE_NAME }}
-          working-directory: ./src/api
+        working-directory: ./src/api
         run: |
           npm install
           npm run build

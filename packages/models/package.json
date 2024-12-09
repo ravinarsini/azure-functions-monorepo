@@ -23,7 +23,7 @@
   "devDependencies": {
     "@repo/eslint-config": "*",
     "@repo/typescript-config": "*",
-    "@types/node": "*",
+    "@types/node": "latest",
     "tsup": "latest",
     "typescript": "latest"
   }
