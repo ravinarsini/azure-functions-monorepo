@@ -30,10 +30,10 @@ jobs:
       # Build the API and Read ENV
       - name: Build API    
         env:
-          DB_CONN: ${{ secrets.DB_CONN }}
-          DB_NAME: ${{ secrets.DB_NAME }}
-          OBS_CONN: ${{ secrets.OBS_CONN }}
-          OBS_ROLE_NAME: ${{ secrets.OBS_ROLE_NAME }}
+          DB_CONN: ${{ env.DB_CONN }}
+          DB_NAME: ${{ env.DB_NAME }}
+          OBS_CONN: ${{ env.OBS_CONN }}
+          OBS_ROLE_NAME: ${{ env.OBS_ROLE_NAME }}
         working-directory: ./src/api
         run: |
           pwd
@@ -53,8 +53,8 @@ jobs:
 
       - name: build web
         env:
-          VITE_API_BASE_URL: ${{ secrets.VITE_API_BASE_URL }}
-          VITE_APPLICATIONINSIGHTS_CONNECTION_STRING: ${{ secrets.VITE_APPLICATIONINSIGHTS_CONNECTION_STRING }}
+          VITE_API_BASE_URL: ${{ env.VITE_API_BASE_URL }}
+          VITE_APPLICATIONINSIGHTS_CONNECTION_STRING: ${{ env.VITE_APPLICATIONINSIGHTS_CONNECTION_STRING }}
         working-directory: ./src/web
         run: |
           npm install
